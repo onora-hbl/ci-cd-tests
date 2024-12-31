@@ -1,7 +1,7 @@
 name: Main pipeline
 
 env:
-  PNPM_version: ${{ env.PNPM_VERSION }}
+  PNPM_version: 8
   NODE_VERSION: 20
 
 on:
