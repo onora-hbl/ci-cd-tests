@@ -14,7 +14,7 @@ function App() {
 
   const onClick = () => {
     fetch(`${process.env.VITE_BACK_URL}/increment`, { method: 'POST' })
-      .then((res: any) => res.json())
+      .then((res) => res.json())
       .then((data) => setCount(data.count))
   }
 
