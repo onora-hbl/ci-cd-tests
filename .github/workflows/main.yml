@@ -80,7 +80,7 @@ jobs:
 
   build-front-app:
     name: Build front-app
-    needs: pre-build
+    needs: [lint-front-app, lint-back-app]
 
     runs-on: ubuntu-latest
 
