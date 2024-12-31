@@ -27,28 +27,38 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: './front-app/pnpm-lock.yaml'
 
-      - name: Install front-app dependencies
+      - name: Install dependencies
         run: pnpm install
 
-      - name: Lint front-app
+      - name: Lint app
         run: pnpm lint
 
-  # back-app:
-  #   runs-on: ubuntu-latest
+  back-app:
+    runs-on: ubuntu-latest
 
-  #   defaults:
-  #     run:
-  #       working-directory: back-app
+    defaults:
+      run:
+        working-directory: back-app
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Pnpm setup
-  #       uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
 
-  #     - name: Install back-app dependencies
-  #       run: pnpm install
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: './back-app/pnpm-lock.yaml'
 
-  #     - name: Lint back-app
-  #       run: pnpm lint
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint app
+        run: pnpm lint
