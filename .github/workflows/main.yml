@@ -12,10 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    concurrency:
-      group: pre-build-${{ github.job }}-${{ github.ref }} 
-      cancel-in-progress: true
-
     defaults:
       run:
         working-directory: front-app
@@ -47,10 +43,6 @@ jobs:
     name: Lint back-app
 
     runs-on: ubuntu-latest
-
-    concurrency:
-      group: pre-build-${{ github.job }}-${{ github.ref }} 
-      cancel-in-progress: true
 
     defaults:
       run:
@@ -84,10 +76,6 @@ jobs:
     needs: [lint-front-app, lint-back-app]
 
     runs-on: ubuntu-latest
-
-    concurrency:
-      group: build-${{ github.job }}-${{ github.ref }} 
-      cancel-in-progress: true
 
     defaults:
       run:
