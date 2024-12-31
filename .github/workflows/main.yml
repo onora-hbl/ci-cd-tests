@@ -1,10 +1,19 @@
-name: Lint check
+name: Main pipeline
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  front-app:
+  lint-front-app:
+    name: Lint front-app
+
     runs-on: ubuntu-latest
+
+    concurrency:
+      group: pre-build
+      cancel-in-progress: true
 
     defaults:
       run:
@@ -33,8 +42,14 @@ jobs:
       - name: Lint app
         run: pnpm lint
 
-  back-app:
+  lint-back-app:
+    name: Lint back-app
+
     runs-on: ubuntu-latest
+
+    concurrency:
+      group: pre-build
+      cancel-in-progress: true
 
     defaults:
       run:
@@ -62,3 +77,40 @@ jobs:
 
       - name: Lint app
         run: pnpm lint
+
+  build-front-app:
+    name: Build front-app
+    needs: pre-build
+
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: build
+      cancel-in-progress: true
+
+    defaults:
+      run:
+        working-directory: front-app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: './front-app/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build app
+        run: pnpm build
