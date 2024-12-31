@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+          cache-dependency-path: './front-app/pnpm-lock.yaml'
 
       - name: Install front-app dependencies
         run: pnpm install
