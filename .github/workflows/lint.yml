@@ -10,6 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Pnpm setup
+        uses: pnpm/action-setup@v2
+
       - name: Install front-app dependencies
         run: cd front-app && pnpm install
 
@@ -22,6 +25,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Pnpm setup
+        uses: pnpm/action-setup@v2
 
       - name: Install back-app dependencies
         run: cd back-app && pnpm install
