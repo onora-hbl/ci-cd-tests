@@ -6,6 +6,10 @@ jobs:
   front-app:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: front-app
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -14,13 +18,17 @@ jobs:
         uses: pnpm/action-setup@v2
 
       - name: Install front-app dependencies
-        run: cd front-app && pnpm install
+        run: pnpm install
 
       - name: Lint front-app
-        run: cd front-app && pnpm lint
+        run: pnpm lint
 
   back-app:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: back-app
 
     steps:
       - name: Checkout
@@ -30,7 +38,7 @@ jobs:
         uses: pnpm/action-setup@v2
 
       - name: Install back-app dependencies
-        run: cd back-app && pnpm install
+        run: pnpm install
 
       - name: Lint back-app
-        run: cd back-app && pnpm lint
+        run: pnpm lint
