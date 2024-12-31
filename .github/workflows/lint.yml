@@ -1,0 +1,30 @@
+name: Lint check
+
+on: [push]
+
+jobs:
+  front-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install front-app dependencies
+        run: cd front-app && pnpm install
+
+      - name: Lint front-app
+        run: cd front-app && pnpm lint
+
+  back-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install back-app dependencies
+        run: cd back-app && pnpm install
+
+      - name: Lint back-app
+        run: cd back-app && pnpm lint
