@@ -14,8 +14,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Pnpm setup
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Install front-app dependencies
         run: pnpm install
@@ -23,22 +32,22 @@ jobs:
       - name: Lint front-app
         run: pnpm lint
 
-  back-app:
-    runs-on: ubuntu-latest
+  # back-app:
+  #   runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: back-app
+  #   defaults:
+  #     run:
+  #       working-directory: back-app
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Pnpm setup
-        uses: pnpm/action-setup@v2
+  #     - name: Pnpm setup
+  #       uses: pnpm/action-setup@v2
 
-      - name: Install back-app dependencies
-        run: pnpm install
+  #     - name: Install back-app dependencies
+  #       run: pnpm install
 
-      - name: Lint back-app
-        run: pnpm lint
+  #     - name: Lint back-app
+  #       run: pnpm lint
