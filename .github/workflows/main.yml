@@ -1,5 +1,9 @@
 name: Main pipeline
 
+env:
+  PNPM_version: ${{ env.PNPM_VERSION }}
+  NODE_VERSION: 20
+
 on:
   push:
     branches:
@@ -10,7 +14,7 @@ jobs:
   lint-front-app:
     name: Lint front-app
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     defaults:
       run:
@@ -23,13 +27,13 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
+          version: ${{ env.PNPM_VERSION }}
           run_install: false
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
           cache-dependency-path: './front-app/pnpm-lock.yaml'
 
@@ -42,7 +46,7 @@ jobs:
   lint-back-app:
     name: Lint back-app
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     defaults:
       run:
@@ -55,13 +59,13 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
+          version: ${{ env.PNPM_VERSION }}
           run_install: false
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
           cache-dependency-path: './back-app/pnpm-lock.yaml'
 
@@ -75,7 +79,7 @@ jobs:
     name: Build front-app
     needs: [lint-front-app, lint-back-app]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     defaults:
       run:
@@ -88,13 +92,13 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
+          version: ${{ env.PNPM_VERSION }}
           run_install: false
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
           cache-dependency-path: './front-app/pnpm-lock.yaml'
 
