@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: pre-build
+      group: pre-build-${{ github.job }}-${{ github.ref }} 
       cancel-in-progress: true
 
     defaults:
@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: pre-build
+      group: pre-build-${{ github.job }}-${{ github.ref }} 
       cancel-in-progress: true
 
     defaults:
@@ -86,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: build
+      group: build-${{ github.job }}-${{ github.ref }} 
       cancel-in-progress: true
 
     defaults:
