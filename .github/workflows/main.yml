@@ -38,6 +38,10 @@ jobs:
           echo "Front-app: ${{ steps.filter.outputs.front-app }}"
           echo "Back-app: ${{ steps.filter.outputs.back-app }}"
 
+    outputs:
+      front-app: ${{ steps.filter.outputs.front-app }}
+      back-app: ${{ steps.filter.outputs.back-app }}
+
   debug:
     name: Debug filter output
     needs: filter
