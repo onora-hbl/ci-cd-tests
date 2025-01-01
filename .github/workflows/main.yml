@@ -115,7 +115,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v6
         with:
-          context: back-app
+          context: .
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
