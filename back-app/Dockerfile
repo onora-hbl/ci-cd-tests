@@ -31,7 +31,8 @@ RUN corepack enable
 WORKDIR /usr/src/app
 
 # Copy application dependency to the container image.
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package.json ./
+COPY --chown=node:node pnpm-lock.yaml ./
 
 COPY --chown=node:node --from=dev /usr/src/app/node_modules ./node_modules
 
