@@ -23,7 +23,7 @@ function App() {
         count != null && (
           <div className="card">
             <button onClick={onClick}>
-              count is {count}
+              Counter: {count}
             </button>
           </div>
         )
