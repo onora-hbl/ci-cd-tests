@@ -40,7 +40,7 @@ jobs:
     name: Lint ${{ matrix.app }}
     needs: filter
 
-    if: needs.filter.outputs.${{ matrix.app }} == 'true'
+    if: ${{ matrix.app == 'front-app' && needs.filter.outputs.front-app == 'true' || matrix.app == 'back-app' && needs.filter.outputs.back-app == 'true' }}
 
     runs-on: ubuntu-24.04
 
