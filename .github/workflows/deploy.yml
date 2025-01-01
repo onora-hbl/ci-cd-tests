@@ -17,13 +17,13 @@ jobs:
         uses: xSAVIKx/artifact-exists-action@v0
         id: check_coverage_artifact
         with:
-          name: front-app-${{ github.sha }}
+          name: front-app-build
 
       - name: Copy artifact
         if: steps.check_coverage_artifact.outputs.exists == 'true'
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: front-app-${{ github.sha }}
+          local: front-app-build
           remote: /var/www/front-app
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_SSH_USER }}

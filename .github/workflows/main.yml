@@ -141,8 +141,7 @@ jobs:
       - name: Archive build
         uses: actions/upload-artifact@v4
         with:
-          # TODO: change with a semantic versioning
-          name: front-app-build-${{ github.sha }}
+          name: front-app-build
           path: front-app/dist
 
   build-back-app:
