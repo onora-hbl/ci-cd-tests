@@ -82,5 +82,5 @@ jobs:
       - name: Archive build
         uses: actions/upload-artifact@v2
         with:
-          name: build
-        working-directory: front-app/dist
+          name: front-app-build-${{ github.sha }}
+          path: front-app/dist
