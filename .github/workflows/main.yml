@@ -36,9 +36,15 @@ jobs:
   debug:
     name: Debug filter output
     needs: filter
-    run: |
-      echo "Filter front-app = ${{ needs.filter.outputs.front-app }}"
-      echo "Filter back-app = ${{ needs.filter.outputs.back-app }}"
+    
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Debug front-app
+        run: echo ${{ needs.filter.outputs.front-app }}
+
+      - name: Debug back-app
+        run: echo ${{ needs.filter.outputs.back-app }}
 
   lint-front-app:
     name: Lint front-app
