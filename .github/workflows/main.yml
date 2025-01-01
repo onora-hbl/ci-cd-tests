@@ -183,3 +183,33 @@ jobs:
           tags: |
             onorahubleur/ci-cd-discover:back-app-latest
             onorahubleur/ci-cd-discover:back-app-${{ github.sha }}
+
+  deploy-front-app:
+    name: Deploy front-app
+    runs-on: ubuntu-24.04
+    needs: build-front-app
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: front-app-build-${{ github.sha }}
+
+      - name: Copy artifact
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: front-app-build-${{ github.sha }}
+          remote: /var/www/front-app
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_SSH_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+
+      - name: Deploy front-app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_SSH_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/front-app
+            ls -la
