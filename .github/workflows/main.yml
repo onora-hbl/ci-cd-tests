@@ -218,5 +218,3 @@ jobs:
             mkdir -p front-app
             tar -xzf dist.tar.gz
             cp -r dist/* front-app
-            cd front-app
-            ls -la
