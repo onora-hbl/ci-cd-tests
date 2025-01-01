@@ -33,30 +33,9 @@ jobs:
             back-app:
               - 'back-app/**'
 
-      - name: Log filter outputs
-        run: |
-          echo "Front-app: ${{ steps.filter.outputs.front-app }}"
-          echo "Back-app: ${{ steps.filter.outputs.back-app }}"
-
     outputs:
       front-app: ${{ steps.filter.outputs.front-app }}
       back-app: ${{ steps.filter.outputs.back-app }}
-
-  debug:
-    name: Debug filter output
-    needs: filter
-    
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Debug filter
-        run: echo ${{ needs.filter.outputs }}
-
-      - name: Debug front-app
-        run: echo ${{ needs.filter.outputs.front-app }}
-
-      - name: Debug back-app
-        run: echo ${{ needs.filter.outputs.back-app }}
 
   lint-front-app:
     name: Lint front-app
@@ -128,7 +107,7 @@ jobs:
 
   build-front-app:
     name: Build front-app
-    needs: [lint-front-app, lint-back-app]
+    needs: lint-front-app
 
     runs-on: ubuntu-24.04
 
@@ -168,7 +147,7 @@ jobs:
 
   build-back-app:
     name: Build back-app
-    needs: [lint-front-app, lint-back-app]
+    needs: lint-back-app
 
     runs-on: ubuntu-24.04
 
