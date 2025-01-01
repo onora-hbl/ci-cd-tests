@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-    deploy-front-app:
+  deploy-front-app:
     name: Deploy front-app
     runs-on: ubuntu-24.04
 
@@ -38,4 +38,3 @@ jobs:
           script: |
             cd /var/www/front-app
             ls -la
-            
