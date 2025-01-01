@@ -36,7 +36,7 @@ jobs:
   lint-front-app:
     name: Lint front-app
     needs: filter
-    if: ${{ needs.filter.outputs.front-app == 'true' }}
+    if: needs.filter.outputs.src == 'true'
 
     runs-on: ubuntu-24.04
 
