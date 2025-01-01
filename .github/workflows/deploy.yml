@@ -11,23 +11,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-front-app-artifact-exists:
-    name: Check front-app artifact exists
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Check artifact exists
-        uses: xSAVIKx/artifact-exists-action@v0
-        id: check_coverage_artifact
-        with:
-          name: ${{ env.FRONT_ARTIFACT_NAME }}
-
   copy-front-app-artifact:
     name: Copy front-app artifact
     runs-on: ubuntu-24.04
-    needs: check-front-app-artifact-exists
-
-    if: needs.check-front-app-artifact-exists.outputs.exists
 
     steps:
       - name: Download artifact
