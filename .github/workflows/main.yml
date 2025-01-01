@@ -21,7 +21,7 @@ jobs:
         app: [front-app, back-app]
     name: Lint ${{ matrix.app }}
 
-    if: ${{ github.event_name == 'push' && contains(github.event.commits[0].added, matrix.app) || contains(github.event.commits[0].modified, matrix.app) }}
+    if: ${{ github.event_name == 'push' && contains(github.event.commits[0].added, ${{ matrix.app }}) || contains(github.event.commits[0].modified, ${{ matrix.app }}) }}
 
     runs-on: ubuntu-24.04
 
