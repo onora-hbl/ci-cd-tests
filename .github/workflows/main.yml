@@ -103,7 +103,7 @@ jobs:
 
   build-front-app:
     name: Build front-app
-    needs: [lint-front-app, lint-back-app]
+    needs: lint-front-app lint-back-app
 
     runs-on: ubuntu-24.04
 
@@ -143,7 +143,7 @@ jobs:
 
   build-back-app:
     name: Build back-app
-    needs: [lint-front-app, lint-back-app]
+    needs: lint-front-app, lint-back-app
 
     runs-on: ubuntu-24.04
 
