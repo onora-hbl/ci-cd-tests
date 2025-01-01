@@ -139,7 +139,7 @@ jobs:
         run: pnpm build
 
       - name: Archive build
-        run: tar -czf front-app/dist.tar.gz front-app/dist
+        run: tar -czf dist.tar.gz dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
