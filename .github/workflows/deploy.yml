@@ -12,7 +12,7 @@ on:
 
 jobs:
   check-front-app-artifact-exists:
-    name: Check artifact exists
+    name: Check front-app artifact exists
     runs-on: ubuntu-24.04
 
     steps:
@@ -22,8 +22,8 @@ jobs:
         with:
           name: ${{ env.FRONT_ARTIFACT_NAME }}
 
-  copy-artifact:
-    name: Copy artifact
+  copy-front-app-artifact:
+    name: Copy front-app artifact
     runs-on: ubuntu-24.04
     needs: check-front-app-artifact-exists
 
@@ -47,7 +47,7 @@ jobs:
   deploy-front-app:
     name: Deploy front-app
     runs-on: ubuntu-24.04
-    needs: copy-artifact
+    needs: copy-front-app-artifact
 
     steps:
       - name: Deploy front-app
