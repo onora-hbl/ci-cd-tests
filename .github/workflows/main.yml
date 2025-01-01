@@ -80,7 +80,7 @@ jobs:
         run: pnpm build
 
       - name: Archive build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: front-app-build-${{ github.sha }}
           path: front-app/dist
