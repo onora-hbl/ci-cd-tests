@@ -1,5 +1,9 @@
 name: Main pipeline
 
+concurrency:
+  group: main
+  cancel-in-progress: true
+
 env:
   PNPM_VERSION: '8'
   NODE_VERSION: '20'
