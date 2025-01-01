@@ -119,8 +119,10 @@ jobs:
           context: back-app
           file: ./back-app/Dockerfile
           push: true
-          # TODO: change with a semantic versioning
-          tags: ['onorahubleur/ci-cd-discover:back-app-latest', 'onorahubleur/ci-cd-discover:back-app-${{ github.sha }}']
           labels: ${{ steps.meta.outputs.labels }}
+          # TODO: change with a semantic versioning
+          tags: |
+            onorahubleur/ci-cd-discover:back-app-latest
+            onorahubleur/ci-cd-discover:back-app-${{ github.sha }}
 
         
