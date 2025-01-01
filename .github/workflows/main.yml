@@ -199,13 +199,13 @@ jobs:
           name: front-app-build-${{ github.sha }}.tar.gz
 
       - name: Copy artifact
-        uses: garygrossgarten/github-action-scp@release
+        uses: appleboy/scp-action@v0.1.7
         with:
-          local: dist.tar.gz
-          remote: /var/www
+          source: dist.tar.gz
+          target: /var/www
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_SSH_USER }}
-          privateKey: ${{ secrets.SERVER_SSH_KEY }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
 
       - name: Deploy front-app
         uses: appleboy/ssh-action@master
