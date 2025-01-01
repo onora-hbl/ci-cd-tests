@@ -48,7 +48,7 @@ jobs:
 
   build-front-app:
     name: Build front-app
-    needs: lint
+    # needs: lint
 
     runs-on: ubuntu-24.04
 
@@ -87,7 +87,7 @@ jobs:
 
   build-back-app:
     name: Build back-app
-    needs: lint
+    # needs: lint
 
     runs-on: ubuntu-24.04
 
@@ -111,15 +111,12 @@ jobs:
         with:
           images: onorahubleur/ci-cd-discover
 
-      - name: ls
-        run: ls
-
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile
+          file: ./back-app/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
