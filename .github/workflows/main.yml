@@ -33,6 +33,11 @@ jobs:
             back-app:
               - 'back-app/**'
 
+      - name: Log filter outputs
+        run: |
+          echo "Front-app: ${{ steps.filter.outputs.front-app }}"
+          echo "Back-app: ${{ steps.filter.outputs.back-app }}"
+
   debug:
     name: Debug filter output
     needs: filter
@@ -40,6 +45,9 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
+      - name: Debug filter
+        run: echo ${{ needs.filter.outputs }}
+
       - name: Debug front-app
         run: echo ${{ needs.filter.outputs.front-app }}
 
