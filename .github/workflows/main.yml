@@ -179,5 +179,3 @@ jobs:
           tags: |
             onorahubleur/ci-cd-discover:back-app-latest
             onorahubleur/ci-cd-discover:back-app-${{ github.sha }}
-
-        
