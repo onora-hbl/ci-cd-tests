@@ -198,13 +198,10 @@ jobs:
         with:
           name: front-app-build-${{ github.sha }}.tar.gz
 
-      - name: debug
-        run: ls -la
-
       - name: Copy artifact
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: front-app-build-${{ github.sha }}.tar.gz
+          local: dist.tar.gz
           remote: /var/www
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_SSH_USER }}
@@ -218,6 +215,6 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /var/www
-            tar -xzf front-app-build-${{ github.sha }}.tar.gz -C front-app
+            tar -xzf dist.tar.gz -C front-app
             cd front-app
             ls -la
