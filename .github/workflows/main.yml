@@ -215,6 +215,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /var/www
-            tar -xzf dist.tar.gz -C front-app
+            mkdir -p front-app
+            tar -xzf dist.tar.gz
+            cp -r dist/* front-app
             cd front-app
             ls -la
