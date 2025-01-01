@@ -11,7 +11,8 @@ RUN corepack enable
 WORKDIR /usr/src/app
 
 # Copy application dependency to the container image.
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package.json ./
+COPY --chown=node:node pnpm-lock.yaml ./
 
 # Install with 'pnpm i' (see: https://stackoverflow.com/questions/52499617/what-is-the-difference-between-pnpm-install-and-pnpm-ci)
 RUN pnpm i
