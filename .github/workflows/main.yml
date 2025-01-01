@@ -33,6 +33,13 @@ jobs:
             back-app:
               - 'back-app/**'
 
+  debug:
+    name: Debug filter output
+    needs: filter
+    run: |
+      echo "Filter front-app = ${{ needs.filter.outputs.front-app }}"
+      echo "Filter back-app = ${{ needs.filter.outputs.back-app }}"
+
   lint-front-app:
     name: Lint front-app
     needs: filter
