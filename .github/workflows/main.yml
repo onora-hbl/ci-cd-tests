@@ -25,9 +25,9 @@ jobs:
 
       - name: Filter changes
         id: filter
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         with:
-          filters:
+          filters: |
             front-app:
               - 'front-app/**'
             back-app:
