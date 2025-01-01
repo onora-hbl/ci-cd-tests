@@ -48,7 +48,7 @@ jobs:
 
   build-front-app:
     name: Build front-app
-    # needs: lint
+    needs: lint
 
     runs-on: ubuntu-24.04
 
@@ -82,19 +82,15 @@ jobs:
       - name: Archive build
         uses: actions/upload-artifact@v4
         with:
+          # TODO: change with a semantic versioning
           name: front-app-build-${{ github.sha }}
           path: front-app/dist
 
   build-back-app:
     name: Build back-app
-    # needs: lint
+    needs: lint
 
     runs-on: ubuntu-24.04
-
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     defaults:
       run:
@@ -123,14 +119,8 @@ jobs:
           context: back-app
           file: ./back-app/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          # TODO: change with a semantic versioning
+          tags: ['onorahubleur/ci-cd-discover:back-app-latest', 'onorahubleur/ci-cd-discover:back-app-${{ github.sha }}']
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: onorahubleur/ci-cd-discover
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
 
         
