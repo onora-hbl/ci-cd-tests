@@ -40,7 +40,7 @@ jobs:
   lint-front-app:
     name: Lint front-app
     needs: filter
-    if: ${{ needs.filter.outputs.front-app == 'true' }}
+    if: ${{ needs.filter.outputs.front-app == 'true' || github.event_name == 'workflow_dispatch' }}
 
     runs-on: ubuntu-24.04
 
@@ -74,7 +74,7 @@ jobs:
   lint-back-app:
     name: Lint back-app
     needs: filter
-    if: ${{ needs.filter.outputs.back-app == 'true' }}
+    if: ${{ needs.filter.outputs.back-app == 'true' || github.event_name == 'workflow_dispatch' }}
 
     runs-on: ubuntu-24.04
 
