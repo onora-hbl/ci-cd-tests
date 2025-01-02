@@ -3,6 +3,7 @@ services:
   back-app:
     container_name: back_app
     image: onorahubleur/ci-cd-discover:back-app-latest
+    pull_policy: always
     restart: always
     environment:
       FRONT_URL: https://prod.${DOMAIN_NAME}
@@ -12,6 +13,7 @@ services:
   front-app:
     container_name: front_app
     image: onorahubleur/ci-cd-discover:front-app-latest
+    pull_policy: always
     restart: always
     environment:
       VITE_BACK_URL: https://prod-api.${DOMAIN_NAME}
