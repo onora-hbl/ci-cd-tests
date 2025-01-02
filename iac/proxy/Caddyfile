@@ -19,7 +19,7 @@ http://prod-api.${DOMAIN_NAME} {
 }
 
 prod-api.${DOMAIN_NAME} {
-	reverse_proxy back-app:80 {
+	reverse_proxy back-app:3000 {
 		header_up X-Forwarded-Proto {scheme}
 	}
 }
