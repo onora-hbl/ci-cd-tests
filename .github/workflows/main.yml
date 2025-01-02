@@ -197,7 +197,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /app/ci-cd-tests/iac
-            sudo docker compose up -d front-app
+            sudo docker compose up front-app -d --build --force-recreate
 
   deploy-back-app:
     name: Deploy back-app
@@ -213,4 +213,4 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /app/ci-cd-tests/iac
-            sudo docker compose up -d back-app
+            sudo docker compose up back-app -d --build --force-recreate
