@@ -4,8 +4,24 @@
 	}
 }
 
+http://prod.${DOMAIN_NAME} {
+	redirect https://prod.${DOMAIN_NAME}{uri} permanent
+}
+
+https://prod.${DOMAIN_NAME} {
+	reverse_proxy front_app:80
+}
+
 prod.${DOMAIN_NAME} {
 	reverse_proxy front_app:80
+}
+
+http://prod-api.${DOMAIN_NAME} {
+	redirect https://prod-api.${DOMAIN_NAME}{uri} permanent
+}
+
+https://prod-api.${DOMAIN_NAME} {
+	reverse_proxy back_app:3000
 }
 
 prod-api.${DOMAIN_NAME} {
