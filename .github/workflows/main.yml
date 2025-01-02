@@ -183,34 +183,17 @@ jobs:
             onorahubleur/ci-cd-discover:back-app-latest
             onorahubleur/ci-cd-discover:back-app-${{ github.sha }}
 
-  # deploy-front-app:
-  #   name: Deploy front-app
-  #   runs-on: ubuntu-24.04
-  #   needs: build-front-app
+  deploy-front-app:
+    name: Deploy front-app
+    runs-on: ubuntu-24.04
+    needs: build-front-app
 
-  #   steps:
-  #     - name: Download artifact
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: front-app-build-${{ github.sha }}.tar.gz
-
-  #     - name: Copy artifact
-  #       uses: appleboy/scp-action@v0.1.7
-  #       with:
-  #         source: dist.tar.gz
-  #         target: /var/www
-  #         host: ${{ secrets.SERVER_HOST }}
-  #         username: ${{ secrets.SERVER_SSH_USER }}
-  #         key: ${{ secrets.SERVER_SSH_KEY }}
-
-  #     - name: Deploy front-app
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.SERVER_HOST }}
-  #         username: ${{ secrets.SERVER_SSH_USER }}
-  #         key: ${{ secrets.SERVER_SSH_KEY }}
-  #         script: |
-  #           cd /var/www
-  #           mkdir -p front-app
-  #           tar -xzf dist.tar.gz
-  #           cp -r dist/* front-app
+      - name: Deploy front-app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_SSH_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /app/ci-cd-tests/iac
+            docker compose up -d front-app
