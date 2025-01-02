@@ -35,6 +35,7 @@ COPY --chown=node:node . .
 RUN npm run build
 
 FROM nginx:latest AS production
+ENV VITE_BACK_URL="$VITE_BACK_URL"
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html

@@ -25,6 +25,7 @@ CMD [ "pnpm", "start:dev" ]
 FROM node:latest AS production
 ENV PNPM_HOME="/ppnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ENV FRONT_URL="$FRONT_URL"
 RUN corepack enable
 
 # Create app directory and set it as our working directory for subsequent operation
