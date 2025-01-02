@@ -9,11 +9,15 @@ http://prod.${DOMAIN_NAME} {
 }
 
 https://prod.${DOMAIN_NAME} {
-	reverse_proxy front_app:80
+	reverse_proxy front_app:80 {
+		header_up X-Forwarded-Proto {scheme}
+	}
 }
 
 prod.${DOMAIN_NAME} {
-	reverse_proxy front_app:80
+	reverse_proxy front_app:80 {
+		header_up X-Forwarded-Proto {scheme}
+	}
 }
 
 http://prod-api.${DOMAIN_NAME} {
@@ -21,9 +25,13 @@ http://prod-api.${DOMAIN_NAME} {
 }
 
 https://prod-api.${DOMAIN_NAME} {
-	reverse_proxy back_app:3000
+	reverse_proxy back_app:3000 {
+		header_up X-Forwarded-Proto {scheme}
+	}
 }
 
 prod-api.${DOMAIN_NAME} {
-	reverse_proxy back_app:3000
+	reverse_proxy back_app:3000 {
+		header_up X-Forwarded-Proto {scheme}
+	}
 }
