@@ -1,0 +1,47 @@
+services:
+
+  back-app:
+    container_name: back_app
+    image: onorahubleur/ci-cd-discover:back-app-latest
+    restart: always
+    environment:
+      FRONT_URL: https://prod.${DOMAIN_NAME}
+    networks:
+      - caddy
+
+  front-app:
+    container_name: front_app
+    image: onorahubleur/ci-cd-discover:front-app-latest
+    restart: always
+    environment:
+      VITE_BACK_URL: https://prod-api.${DOMAIN_NAME}
+    networks:
+      - caddy
+
+  proxy:
+    container_name: proxy
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        CLOUDFLARE_KEY: ${CLOUDFLARE_KEY}
+    restart: always
+    volumes:
+      - caddy:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - caddy
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - back-app
+      - front-app
+
+volumes:
+  caddy:
+
+networks:
+  caddy:
+    driver: bridge
